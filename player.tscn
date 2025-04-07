@@ -1,6 +1,10 @@
-[gd_scene format=3 uid="uid://d1xtxu0xw7xq"]
+[gd_scene load_steps=2 format=3 uid="uid://d1xtxu0xw7xq"]
+
+[ext_resource type="Script" uid="uid://c5w1xadomoyc" path="res://player.gd" id="1_4flbx"]
 
 [node name="Node2D" type="Node2D"]
 
 [node name="Area2D" type="Area2D" parent="."]
-metadata/_edit_group_ = true
+script = ExtResource("1_4flbx")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
