@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://d1xtxu0xw7xq"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Area2D" type="Area2D" parent="."]
+metadata/_edit_group_ = true
