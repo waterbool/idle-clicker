@@ -10,7 +10,7 @@ func start(pos):
 	
 func _ready():
 	screen_size = get_viewport_rect().size
-	hide()
+	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 
 func _on_body_entered(_body):

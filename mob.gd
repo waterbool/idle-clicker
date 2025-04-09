@@ -1,12 +1,8 @@
 extends RigidBody2D
 
+@export var speed = 150
 
 func _ready():
-	var mob_types = Array($AnimatedSprite2D.sprite_frames.get_animation_names())
-	$AnimatedSprite2D.animation = mob_types.pick_random()
-
-func _on_visible_on_screen_notifier_2d_screen_exited():
-	queue_free()
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+	var target_position = get_viewport().get_visible_rect().size / 2
+	var direction = (target_position - global_position).normalized()
+	linear_velocity = direction * speed

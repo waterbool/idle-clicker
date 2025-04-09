@@ -6,9 +6,10 @@ var score
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	new_game()
+	$SpawnTimer.start()
 
-
+func _on_SpawnTimer_timeout():
+	spawn_mob()
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
@@ -35,22 +36,17 @@ func _on_mob_timer_timeout():
 	var mob = mob_scene.instantiate()
 
 	# Choose a random location on Path2D.
-	var mob_spawn_location = $MobPath/MobSpawnLocation
-	mob_spawn_location.progress_ratio = randf()
-
-	# Set the mob's position to the random location.
-	mob.position = mob_spawn_location.position
-
-	# Set the mob's direction perpendicular to the path direction.
-	var direction = mob_spawn_location.rotation + PI / 2
-
-	# Add some randomness to the direction.
-	direction += randf_range(-PI / 4, PI / 4)
-	mob.rotation = direction
-
-	# Choose the velocity for the mob.
-	var velocity = Vector2(randf_range(150.0, 250.0), 0.0)
-	mob.linear_velocity = velocity.rotated(direction)
-
-	# Spawn the mob by adding it to the Main scene.
+	var screen_size = get_viewport().get_visible_rect().size
+	var spawn_margin = 100
+	var from_position = Vector2()
+	
+	var side = randi() % 4
+	match side:
+		0: from_position = Vector2(randf() * screen_size.x, -spawn_margin)               # сверху
+		1: from_position = Vector2(screen_size.x + spawn_margin, randf() * screen_size.y) # справа
+		2: from_position = Vector2(randf() * screen_size.x, screen_size.y + spawn_margin) # снизу
+		3: from_position = Vector2(-spawn_margin, randf() * screen_size.y)                # слева
+	var center_position = screen_size / 2
+	mob.start(from_position, center_position)
+	
 	add_child(mob)
