@@ -1,9 +1,59 @@
-[gd_scene format=3 uid="uid://ly171nvt38sm"]
+[gd_scene load_steps=6 format=3 uid="uid://ly171nvt38sm"]
+
+[ext_resource type="Texture2D" uid="uid://cljue8bw1oyca" path="res://arts/4.png" id="1_nokgg"]
+[ext_resource type="Script" uid="uid://bnp0307651b86" path="res://mob.gd" id="1_ubaqv"]
+[ext_resource type="Texture2D" uid="uid://bbumpn3wxcorq" path="res://arts/3.png" id="2_ubaqv"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_p11y5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_nokgg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_ubaqv")
+}],
+"loop": true,
+"name": &"fly",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_nokgg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_ubaqv")
+}],
+"loop": true,
+"name": &"swim",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_nokgg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_ubaqv")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 3.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_s5nov"]
+radius = 151.743
 
 [node name="RigidBody2D" type="RigidBody2D"]
+script = ExtResource("1_ubaqv")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(20.018, 14)
+scale = Vector2(0.499965, 0.5)
+sprite_frames = SubResource("SpriteFrames_p11y5")
+animation = &"walk"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(4, -26)
+shape = SubResource("CircleShape2D_s5nov")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
